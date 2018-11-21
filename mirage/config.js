@@ -23,4 +23,14 @@ export default function () {
 
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
+
+  this.get('/uaa/userinfo', function () {
+    return {data: {}}
+  })
+  this.get('/api/content/desktop-header', function () {
+    return []
+  })
+  this.get('/api/content/topnav/', function () {
+    return []
+  })
 }
