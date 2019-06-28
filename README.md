@@ -1,5 +1,7 @@
 # ember-bootcamp-project
 
+[Read the WIKI](https://github.com/ConnectedHomes/ember-bootcamp-project/wiki)
+
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
