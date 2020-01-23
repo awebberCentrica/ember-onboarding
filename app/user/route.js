@@ -6,7 +6,10 @@ export default Route.extend({
   },
   actions: {
     navigate() {
-      this.transitionTo('user.change-name');
+      this._navigate();
     }
+  },
+  _navigate() {
+    this.transitionTo('user.change-name');
   }
 });

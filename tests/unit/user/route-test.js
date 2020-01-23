@@ -11,8 +11,9 @@ module('Unit | Route | user', function (hooks) {
 
   test('navigate function', function (assert) {
     const route = this.owner.lookup('route:user');
-    const stub = sinon.stub(route, 'transitionTo');
-    route.actions.navigate();
-    assert.equal(stub.callCount, 1, 'transitionToSub was called once');
+    const fake = sinon.fake();
+    route.transitionTo = fake;
+    route._navigate();
+    assert.equal(fake.callCount, 1, 'transitionToSub was called once');
   });
 });
