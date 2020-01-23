@@ -31,7 +31,7 @@ module('Integration | Component | input-group', function (hooks) {
   });
 
   test('it should use the default property correctly', async function (assert) {
-    await render(hbs`{{input-group defaultValue='John'}}`);
+    await render(hbs`{{input-group inputValue='John'}}`);
     assert.equal(find('input').value, 'John');
   });
 
