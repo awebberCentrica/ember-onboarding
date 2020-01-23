@@ -9,6 +9,11 @@ const Router = EmberRouter.extend({
 Router.map(function () {
   this.route('welcome', {path: '/'});
   this.route('computed');
+  this.route('user', {path: '/user/:nickname'}, function () {
+    this.route('postcode');
+    this.route('change-name');
+  });
+
 });
 
 export default Router;
