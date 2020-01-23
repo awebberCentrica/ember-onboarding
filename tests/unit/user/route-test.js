@@ -13,7 +13,7 @@ module('Unit | Route | user', function (hooks) {
     const route = this.owner.lookup('route:user');
     const fake = sinon.fake();
     route.transitionTo = fake;
-    route._navigate();
+    route.send('navigate');
     assert.equal(fake.callCount, 1, 'transitionToSub was called once');
   });
 });

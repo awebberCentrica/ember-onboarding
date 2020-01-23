@@ -1,0 +1,12 @@
+<div>
+  <label for="text-input">{{inputLabel}}</label>
+  {{ input id="text-input" value=inputValue }}
+</div>
+{{#if hasError}}
+  <div class="error">
+    Hey it is not valid!
+  </div>
+{{/if}}
+
+
+<button class="btn btn-primary" disabled={{hasError}} {{action "saveInfo" inputValue}}>{{buttonLbl}}</button>
