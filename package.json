@@ -28,7 +28,7 @@
     "babel-eslint": "^8.2.6",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bg-select": "0.0.3",
-    "bg-vi": "github:ConnectedHomes/BG-VI#3.1.8",
+    "bg-vi": "github:ConnectedHomes/BG-VI#4.1.0",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-browserify": "^1.2.2",
