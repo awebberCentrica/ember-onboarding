@@ -43,7 +43,15 @@ const data = [EmberObject.create({
 export default Component.extend({
   init() {
     this._super(...arguments);
-    this.set('users', A(data));
+    this.newCarColor = '';
+    const newArr = [];
+    data.forEach((item) => {
+      const obj = {};
+      Object.assign(obj, item);
+      obj.cars = [...item.cars];
+      newArr.push(obj);
+    });
+    this.set('users', A(newArr));
     this.set('availableColors', A(['white', 'red', 'green', 'yellow']));
   },
 
@@ -51,12 +59,8 @@ export default Component.extend({
    * Please replace these props below with computed props
    * @type {Array}
    */
-  userNames: computed('users', function () {
-    const userNames = [];
-    this.get('users').forEach((item) => {
-      userNames.push(item.name);
-    });
-    return userNames;
+  userNames: computed.map('users', function (user) {
+    return user.name;
   }),
   bmwusers: computed('users', function () {
     const bmwUsers = [];
@@ -107,7 +111,6 @@ export default Component.extend({
     });
     return makeOfCar;
   }),
-  newCarColor: '',
   actions: {
     setNewCarColor(color) {
       this.set('newCarColor', color);

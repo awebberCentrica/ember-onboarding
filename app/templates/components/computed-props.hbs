@@ -58,11 +58,11 @@
 
 <h2>All users with list of cars</h2>
 {{!-- with "Add new car" and "Remove car functionality" functionality" --}}
-<div>
+<div id="user-list">
   {{#each users as |user userIndex|}}
     <div class="car-block">
       {{user.name}}
-      <div class="car-list">
+      <div id="car-list" class="car-list">
         {{#each user.cars as |car carIndex|}}
           <div class="car-make">
             {{car.make}}
@@ -78,7 +78,7 @@
           <option value={{color}} >{{color}}</option>
         {{/each}}
       </select>
-      <button class="btn btn-primary" {{action 'addNewCar' userIndex}}>Add Car</button>
+      <button class="btn btn-primary add-btn" {{action 'addNewCar' userIndex}}>Add Car</button>
     </div>
   {{/each}}
 </div>
