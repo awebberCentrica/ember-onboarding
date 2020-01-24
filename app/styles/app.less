@@ -1,1 +1,23 @@
 @import "pod-styles";
+
+.car-block {
+  display: flex;
+  margin-bottom: 8px;
+
+  .car-list {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+
+    .car-make {
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}

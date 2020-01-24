@@ -5,6 +5,7 @@
  */
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
+import {computed} from '@ember/object';
 import {A} from '@ember/array';
 
 const data = [EmberObject.create({
@@ -50,11 +51,88 @@ export default Component.extend({
    * Please replace these props below with computed props
    * @type {Array}
    */
-  userNames: [],
-  bmwusers: [],
-  whiteCarsUsers: [],
-  usersWith1Car: [],
-  userswithMoreThanOneCar: [],
-  allMakes: [] // no repeat of makes
+  userNames: computed('users', function () {
+    const userNames = [];
+    this.get('users').forEach((item) => {
+      userNames.push(item.name);
+    });
+    return userNames;
+  }),
+  bmwusers: computed('users', function () {
+    const bmwUsers = [];
+    this.get('users').forEach((user) => {
+      const foundCar = user.cars.find((car) => car.make === 'BMW');
+      if (foundCar) {
+        bmwUsers.push(user.name);
+      }
+    });
+    return bmwUsers;
+  }),
+  whiteCarsUsers: computed('users', function () {
+    const whiteCarUsers = [];
+    this.get('users').forEach((user) => {
+      const foundCar = user.cars.find((car) => car.color === 'white');
+      if (foundCar) {
+        whiteCarUsers.push(user.name);
+      }
+    });
+    return whiteCarUsers;
+  }),
+  usersWith1Car: computed('users', function () {
+    const usersWith1Car = [];
+    this.get('users').forEach((user) => {
+      if (user.cars.length === 1) {
+        usersWith1Car.push(user.name);
+      }
+    });
+    return usersWith1Car;
+  }),
+  userswithMoreThanOneCar: computed('users', function () {
+    const usersWithMoreThan1Car = [];
+    this.get('users').forEach((user) => {
+      if (user.cars.length > 1) {
+        usersWithMoreThan1Car.push(user.name);
+      }
+    });
+    return usersWithMoreThan1Car;
+  }),
+  allMakes: computed('users', function () {
+    const makeOfCar = [];
+    this.get('users').forEach((user) => {
+      user.cars.forEach((car) => {
+        if (!makeOfCar.includes(car.make)) {
+          makeOfCar.push(car.make);
+        }
+      });
+    });
+    return makeOfCar;
+  }),
+  newCarColor: '',
+  actions: {
+    setNewCarColor(color) {
+      this.set('newCarColor', color);
+    },
+    addNewUser() {
+      this.get('users').pushObject({
+        name: this.get('newUsername'),
+        cars: [{
+          make: this.get('newCarMake'),
+          color: this.get('newCarColor')
+        }]
+      });
+      this.set('newUsername', '');
+      this.set('newCarMake', '');
+      this.set('newCarColor', '');
+    },
+    removeCar(userIndex, carIndex) {
+      this.get('users')[userIndex].cars.removeAt(carIndex, 1);
+    },
+    addNewCar(userIndex) {
+      this.get('users')[userIndex].cars.pushObject({
+        make: this.get('userCarMake'),
+        color: this.get('newCarColor')
+      });
+    }
+  }
 
 });

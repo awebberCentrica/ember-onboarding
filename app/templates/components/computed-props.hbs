@@ -9,40 +9,78 @@
   {{!-- and should appear on the end of the list below --}}
   {{!-- list of colors is provided by availableColors property --}}
   {{!-- Make can be any --}}
+  <div class="form-group">
+    <label for="username">Enter Username</label>
+    {{input value=newUsername id="username"}}
+  </div>
+  <div class="form-group">
+    <label for="carMake">Enter Make of car</label>
+    {{input value=newCarMake id="carMake"}}
+  </div>
+  <div class="form-group">
+    <label for="carColour">Select Car Colour</label>
+    <select id="carColour" onchange={{action "setNewCarColor" value="target.value"}}>
+      {{#each availableColors as |color|}}
+        <option value={{color}} >{{color}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <button class="btn btn-primary" id="addNewUser" {{action 'addNewUser'}}>Add new user</button>
 </form>
 
 <h2>BMW users</h2>
 <div>
-  ...
+  {{bmwusers}}
 </div>
 
 
 <h2>White car users</h2>
 <div>
-  ...
+  {{whiteCarsUsers}}
 </div>
 
 <h2>Users who has 1 car</h2>
 <div>
-  ...
+  {{usersWith1Car}}
 </div>
 
 <h2>Users who has more than 1 car</h2>
 <div>
-  ...
+  {{userswithMoreThanOneCar}}
 </div>
 
 
 <h2>All makes</h2>
 <div>
-  ...
+  {{allMakes}}
 </div>
 
 
 <h2>All users with list of cars</h2>
 {{!-- with "Add new car" and "Remove car functionality" functionality" --}}
 <div>
-  ...
+  {{#each users as |user userIndex|}}
+    <div class="car-block">
+      {{user.name}}
+      <div class="car-list">
+        {{#each user.cars as |car carIndex|}}
+          <div class="car-make">
+            {{car.make}}
+            <button class="btn btn-primary" {{action 'removeCar' userIndex carIndex}}>Remove Car</button>
+          </div>
+        {{/each}}
+      </div>
+      <label>Enter Make of car</label>
+      {{input value=userCarMake}}
+      <label>Select Car Colour</label>
+      <select onchange={{action "setNewCarColor" value="target.value"}}>
+        {{#each availableColors as |color|}}
+          <option value={{color}} >{{color}}</option>
+        {{/each}}
+      </select>
+      <button class="btn btn-primary" {{action 'addNewCar' userIndex}}>Add Car</button>
+    </div>
+  {{/each}}
 </div>
 
 
